@@ -5,6 +5,7 @@ edition = "2021"
 description = "Shared wire-format types for discovery-* flight-controller telemetry (no_std, postcard + COBS)"
 license = "MIT"
 repository = "https://github.com/wboayue/discovery-telemetry"
+homepage = "https://github.com/wboayue/discovery-telemetry"
 readme = "README.md"
 keywords = ["telemetry", "no-std", "postcard", "cobs", "embedded"]
 categories = ["embedded", "no-std", "encoding", "aerospace"]

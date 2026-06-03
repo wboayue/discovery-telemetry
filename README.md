@@ -1,5 +1,9 @@
 # discovery-telemetry
 
+[![Crates.io](https://img.shields.io/crates/v/discovery-telemetry.svg)](https://crates.io/crates/discovery-telemetry)
+[![Documentation](https://docs.rs/discovery-telemetry/badge.svg)](https://docs.rs/discovery-telemetry)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Shared wire-format types for the `discovery-*` flight-controller family. Single source of
 truth for the bytes on the wire between firmware (`ark-discovery`, `no_std`) and host tools
 (`discovery-scope`, `std`) — neither side hand-writes a parser.
