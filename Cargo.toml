@@ -1,6 +1,6 @@
 [package]
 name = "discovery-telemetry"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "Shared wire-format types for discovery-* flight-controller telemetry (no_std, postcard + COBS)"
 license = "MIT"
@@ -17,3 +17,5 @@ std = []
 [dependencies]
 serde = { version = "1", default-features = false, features = ["derive"] }
 postcard = { version = "1", default-features = false }
+# serde's built-in array impls stop at length 32; Status::text is [u8; 48]. no_std, tiny.
+serde-big-array = "0.5"

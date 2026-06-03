@@ -8,9 +8,10 @@
 use crate::frames::Frame;
 use postcard::accumulator::{CobsAccumulator, FeedResult};
 
-/// Upper bound on one COBS-framed frame, bytes. Largest payload is [`crate::Imu`]
-/// (7×f32 + disc + varint `t_ms`) ≈ 33 B; COBS adds ≤1 B per 254 plus a delimiter. 64 B
-/// leaves comfortable headroom — size firmware encode buffers and the [`Decoder`] to this.
+/// Upper bound on one COBS-framed frame, bytes. Largest payload is [`crate::Status`]
+/// (`[u8;48]` + level disc + msg disc + varint `t_ms`) ≈ 55 B; COBS adds ≤1 B per 254 plus a
+/// delimiter → ≈ 57 B. 64 B keeps ~7 B headroom — size firmware encode buffers and the
+/// [`Decoder`] to this. (Growing `Status::text` past ~54 bytes would breach this bound.)
 pub const MAX_FRAME: usize = 64;
 
 /// Encode `frame` as a COBS-delimited postcard packet into `buf` (recommended `MAX_FRAME`).
@@ -81,7 +82,7 @@ pub fn decode_all(bytes: &[u8]) -> std::vec::Vec<Frame> {
 mod tests {
     extern crate std;
     use super::*;
-    use crate::frames::{Baro, Board, Fused, Hello, Imu, Mag, Msg};
+    use crate::frames::{Baro, Board, Fused, Hello, Imu, Level, Mag, Msg, Status};
     use crate::PROTOCOL_VERSION;
     use std::vec::Vec;
 
@@ -144,6 +145,16 @@ mod tests {
                 altitude_m: 100.45,
                 vertical_speed_mps: 0.12,
                 baro_residual_m: 0.05,
+            }),
+        });
+        // Status with a full-width text payload exercises the largest frame against MAX_FRAME.
+        let mut text = [0u8; 48];
+        text[..11].copy_from_slice(b"baro BMP390");
+        roundtrip(Frame {
+            t_ms: u32::MAX,
+            msg: Msg::Status(Status {
+                level: Level::Error,
+                text,
             }),
         });
     }

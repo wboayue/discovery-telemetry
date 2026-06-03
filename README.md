@@ -18,9 +18,11 @@ USB CDC byte stream
             └─ Frame { t_ms, msg }
 ```
 
-`Msg` is `Hello | Tick | Imu | Baro | Mag | Fused`. Payloads mirror the firmware sensor
-structs 1:1; `Fused` (roll/pitch/yaw/alt/vspeed) drives the PFD. SI/degrees on the wire;
-display-unit conversion stays at the host's display boundary.
+`Msg` is `Hello | Tick | Imu | Baro | Mag | Fused | Status`. Payloads mirror the firmware
+sensor structs 1:1; `Fused` (roll/pitch/yaw/alt/vspeed) drives the PFD. `Status { level, text }`
+carries the firmware's non-data lines (mode acks, sensor bring-up, errors) so they survive a
+binary stream. SI/degrees on the wire; display-unit conversion stays at the host's display
+boundary.
 
 ## Use
 

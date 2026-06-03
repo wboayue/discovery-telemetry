@@ -2,6 +2,7 @@
 //! (`ImuSample`/`BaroSample`/`MagSample`/`FusedState`) so emit code is a field copy.
 
 use serde::{Deserialize, Serialize};
+use serde_big_array::BigArray;
 
 /// The versioned envelope. Every frame carries a board-monotonic timestamp so host plots
 /// key on capture time, not host arrival time.
@@ -30,6 +31,9 @@ pub enum Msg {
     Mag(Mag),
     /// Fused attitude + air data — drives the PFD.
     Fused(Fused),
+    /// Human-readable status / event line (mode acks, bring-up identity, errors). The binary
+    /// home for the firmware's non-data text lines so they survive a binary-mode stream.
+    Status(Status),
 }
 
 /// Connection handshake / version gate.
@@ -97,4 +101,25 @@ pub struct Fused {
     pub vertical_speed_mps: f32,
     /// Baro innovation (filter residual). Metres. Diagnostic.
     pub baro_residual_m: f32,
+}
+
+/// Severity of a [`Status`] line. Lets the host route/colour without parsing the text.
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Level {
+    Info,
+    Warn,
+    Error,
+}
+
+/// A human-readable status / event line — the binary equivalent of the firmware's non-data
+/// text output (mode acks like `diag on`, sensor bring-up identity, error/warning conditions).
+/// Without this the firmware's status lines have no binary form; in binary mode they would be
+/// injected as raw text and dropped by the decoder. `text` is fixed-size so the frame stays
+/// `Copy` and `no_std`-friendly; it bounds the largest frame (see [`crate::codec::MAX_FRAME`]).
+#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+pub struct Status {
+    pub level: Level,
+    /// ASCII message, NUL-padded. Trailing NULs are not part of the text.
+    #[serde(with = "BigArray")]
+    pub text: [u8; 48],
 }

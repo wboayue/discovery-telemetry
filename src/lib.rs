@@ -31,6 +31,8 @@ pub mod frames;
 /// [`frames::Msg`] variants, changing a field's type/order, or removing a field.
 /// Appending a new `Msg` variant is decoder-safe *only* because [`codec::Decoder`] skips
 /// and resyncs on frames it can't deserialize. Negotiated via the [`frames::Hello`] frame.
-pub const PROTOCOL_VERSION: u16 = 1;
+///
+/// v2 appends [`frames::Msg::Status`] (status/event lines).
+pub const PROTOCOL_VERSION: u16 = 2;
 
-pub use frames::{Baro, Board, Frame, Fused, Hello, Imu, Mag, Msg};
+pub use frames::{Baro, Board, Frame, Fused, Hello, Imu, Level, Mag, Msg, Status};
