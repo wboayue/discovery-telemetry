@@ -55,6 +55,13 @@ These rules are why the crate exists — breaking one silently corrupts both con
 When changing `frames.rs`, the round-trip tests in `codec.rs` should cover every `Msg`
 variant — add a case to `roundtrip_each_variant` for any new one.
 
+## Code principles
+
+- **No duplication.** Single source of truth — the same intent must not live in two places.
+- **Composable.** Small pieces that combine; prefer functions/types that callers wire
+  together over monoliths.
+- **Single responsibility.** Each type/function/module does one thing.
+
 ## Reference
 
 `docs/telemetry-protocol.md` is the full design doc (rationale: why binary, why postcard +
