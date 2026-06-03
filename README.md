@@ -47,8 +47,8 @@ dec.push(&read_buf[..n], |frame| { /* update Sample / Log */ });
 
 `PROTOCOL_VERSION` gates compatibility; the firmware reports it in the `Hello` frame and the
 host rejects a mismatch. Only ever **append** `Msg` variants — reordering or removing fields
-requires a version bump. See `docs/telemetry-protocol.md` in `discovery-scope` for the full
-design.
+requires a version bump. See [`docs/telemetry-protocol.md`](docs/telemetry-protocol.md) for
+the full design.
 
 ## Develop
 

@@ -4,7 +4,7 @@
 //! `no_std`) and host tools (`discovery-scope`, `std`). Neither side hand-writes a parser;
 //! both compile these types.
 //!
-//! Layering (see `docs/telemetry-protocol.md` in `discovery-scope`):
+//! Layering (see `docs/telemetry-protocol.md` for the full design):
 //!
 //! ```text
 //! USB CDC byte stream
