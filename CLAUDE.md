@@ -9,6 +9,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 (`discovery-scope`, `std`). Both ends compile these types; neither hand-writes a parser.
 It is a small `no_std` library crate — there is no binary.
 
+The `discovery-*` series is a platform for **exploring** embedded flight control (sensors,
+fusion, host visualization) — deliberately not a full flight stack: no control loops, no
+actuation, no ground-control protocol. Keep changes within that charter.
+
 ## Commands
 
 ```bash

@@ -37,6 +37,8 @@ Sharing telemetry from `ark-discovery` firmware to `discovery-scope` (and future
 - Not bidirectional structured commands (yet). Host→board control stays single ASCII bytes
   (`r`, `d`, and the new `b`/`t`) — see [Mode negotiation](#mode-negotiation).
 - Not a ground control station. Read-only scope, per the project charter.
+- Not a full flight stack. The `discovery-*` series exists to **explore** embedded flight
+  control (sensors, fusion, host visualization) — no control loops, no actuation.
 
 ## Current state (text, today)
 

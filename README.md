@@ -4,6 +4,11 @@ Shared wire-format types for the `discovery-*` flight-controller family. Single 
 truth for the bytes on the wire between firmware (`ark-discovery`, `no_std`) and host tools
 (`discovery-scope`, `std`) — neither side hand-writes a parser.
 
+The `discovery-*` series is a platform for **exploring** embedded flight control — sensors,
+fusion, and host visualization. It is deliberately not a full flight stack: no control
+loops, no actuation, no ground-control protocol (see the protocol doc's non-goals). This
+crate is the telemetry wire format that ties firmware to host tools.
+
 Transport: **postcard** over **COBS** framing, on the board's USB CDC serial.
 
 ```text
