@@ -1,6 +1,6 @@
 # Design: discovery telemetry wire format
 
-Status: **proposed** · Owner: discovery-telemetry · Consumers: ark-discovery, discovery-scope · Date: 2026-06-02
+Status: **accepted** · Owner: discovery-telemetry · Consumers: ark-discovery, discovery-scope · Date: 2026-06-02
 
 Sharing telemetry from `ark-discovery` firmware to `discovery-scope` (and future
 `*-discovery` boards / host tools) over USB CDC serial.
