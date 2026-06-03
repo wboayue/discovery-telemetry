@@ -59,6 +59,11 @@ These rules are why the crate exists — breaking one silently corrupts both con
 When changing `frames.rs`, the round-trip tests in `codec.rs` should cover every `Msg`
 variant — add a case to `roundtrip_each_variant` for any new one.
 
+**Keep `CHANGELOG.md` up to date.** Any user-visible change (wire format, public API,
+`PROTOCOL_VERSION`, feature flags) gets an entry under an `## [Unreleased]` heading, in the
+Keep a Changelog style already used (Added/Changed/Removed). Note `PROTOCOL_VERSION` bumps
+explicitly. Roll `[Unreleased]` into a versioned, dated section at release time.
+
 ## Code principles
 
 - **No duplication.** Single source of truth — the same intent must not live in two places.
