@@ -6,6 +6,8 @@ description = "Shared wire-format types for discovery-* flight-controller teleme
 license = "MIT"
 repository = "https://github.com/wboayue/discovery-telemetry"
 readme = "README.md"
+keywords = ["telemetry", "no-std", "postcard", "cobs", "embedded"]
+categories = ["embedded", "no-std", "encoding", "aerospace"]
 
 [features]
 default = []
