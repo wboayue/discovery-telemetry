@@ -10,6 +10,11 @@ readme = "README.md"
 keywords = ["telemetry", "no-std", "postcard", "cobs", "embedded"]
 categories = ["embedded", "no-std", "encoding", "aerospace"]
 
+# docs.rs builds with default (no_std) features and would drop the std-gated `decode_all`
+# (broken doc links). Build the docs with `std` so the full host API is documented.
+[package.metadata.docs.rs]
+features = ["std"]
+
 [features]
 default = []
 # Host conveniences: alloc-based decode helper, std error glue. Core stays no_std.
