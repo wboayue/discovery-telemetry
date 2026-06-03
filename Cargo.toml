@@ -1,0 +1,17 @@
+[package]
+name = "discovery-telemetry"
+version = "0.1.0"
+edition = "2021"
+description = "Shared wire-format types for discovery-* flight-controller telemetry (no_std, postcard + COBS)"
+license = "MIT"
+repository = "https://github.com/wboayue/discovery-telemetry"
+readme = "README.md"
+
+[features]
+default = []
+# Host conveniences: alloc-based decode helper, std error glue. Core stays no_std.
+std = []
+
+[dependencies]
+serde = { version = "1", default-features = false, features = ["derive"] }
+postcard = { version = "1", default-features = false }
