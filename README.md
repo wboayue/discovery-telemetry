@@ -32,10 +32,10 @@ boundary.
 
 ```toml
 # firmware (no_std)
-discovery-telemetry = { git = "https://github.com/wboayue/discovery-telemetry", tag = "v0.1.0" }
+discovery-telemetry = "0.2.0"
 
 # host (std)
-discovery-telemetry = { git = "https://github.com/wboayue/discovery-telemetry", tag = "v0.1.0", features = ["std"] }
+discovery-telemetry = { version = "0.2.0", features = ["std"] }
 ```
 
 Encode (firmware):

@@ -18,6 +18,24 @@
 //!
 //! All angular/SI units are explicit in field names. Floats are little-endian (postcard);
 //! both ARM and x86 hosts are LE, so no byte-swap is needed.
+//!
+//! # Example
+//!
+//! ```
+//! use discovery_telemetry::{codec, Frame, Imu, Msg};
+//!
+//! // firmware: encode a sample into a fixed, no_std buffer
+//! let frame = Frame {
+//!     t_ms: 12,
+//!     msg: Msg::Imu(Imu { accel_g: [0.0, 0.0, -1.0], gyro_dps: [0.0; 3], temp_c: 25.0 }),
+//! };
+//! let mut buf = [0u8; codec::MAX_FRAME];
+//! let wire = codec::encode(&frame, &mut buf).unwrap(); // COBS-delimited bytes
+//!
+//! // host: feed raw stream bytes to the streaming decoder
+//! let mut dec = codec::Decoder::new();
+//! dec.push(wire, |got| assert_eq!(got, frame));
+//! ```
 
 #![no_std]
 
