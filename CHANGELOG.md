@@ -4,6 +4,8 @@ All notable changes to `discovery-telemetry` are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/); the crate follows
 semver, and `PROTOCOL_VERSION` tracks wire compatibility independently.
 
+## [Unreleased]
+
 ## [0.2.0] - 2026-06-02
 
 Adds a status/event message so the firmware's non-data lines (mode acks, sensor bring-up
