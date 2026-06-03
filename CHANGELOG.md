@@ -4,6 +4,24 @@ All notable changes to `discovery-telemetry` are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/); the crate follows
 semver, and `PROTOCOL_VERSION` tracks wire compatibility independently.
 
+## [0.2.0] - 2026-06-02
+
+Adds a status/event message so the firmware's non-data lines (mode acks, sensor bring-up
+identity, errors) have a binary form. `PROTOCOL_VERSION` → 2.
+
+### Added
+
+- `Msg::Status` (appended — decoder-safe) carrying `Status { level: Level, text: [u8; 48] }`.
+  `Level = Info | Warn | Error`. The binary equivalent of the firmware's text status lines;
+  without it those lines would be dropped as garbage in a binary-mode stream.
+- Re-exports of `Status` and `Level`.
+
+### Changed
+
+- `PROTOCOL_VERSION` 1 → 2 (wire surface grew; `Hello.proto` advertises it).
+- `MAX_FRAME` unchanged at 64, but `Status` is now the largest payload (~57 B framed);
+  doc-comment updated.
+
 ## [0.1.0] - 2026-06-02
 
 First tagged release. Wire-format design is **accepted** — this is the format the
